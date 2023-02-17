@@ -1,0 +1,10 @@
+[package]
+name = "example-atmega328p"
+version = "0.1.0"
+edition = "2021"
+
+[profile.dev]
+opt-level = 3
+
+[dependencies]
+avr-bro = { path = "../../../avr-bro", features = ["atmega328p"] }
