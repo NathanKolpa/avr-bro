@@ -9,6 +9,8 @@ strip = true
 [profile.dev]
 opt-level = 3
 strip = true
+overflow-checks = false
+debug-assertions = false
 
 [dependencies]
 avr-bro = { path = "../../../avr-bro", features = ["atmega328p"] }
