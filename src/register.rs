@@ -34,8 +34,8 @@ impl Register {
     /// ```
     /// # use avr_bro::register::{Register, RegisterAddress};
     /// # use std::ptr;
-    /// let mut  mock_register: u8 = 0;
-    /// let register = Register::new(&mut mock_register as *mut u8);
+    /// let mut mock_register: u8 = 0;
+    /// let mut register = Register::new(&mut mock_register as *mut u8);
     ///
     /// // Set bit 4 of the register to 1
     /// unsafe {
@@ -44,11 +44,8 @@ impl Register {
     /// };
     /// ```
     #[inline]
-    pub unsafe fn set_bit(&self, bit: u8) {
-        write_volatile(
-            self.address,
-            read_volatile(self.address) | Self::bit_value(bit),
-        )
+    pub unsafe fn set_bit(&mut self, bit: u8) {
+        self.write(self.read() | Self::bit_value(bit))
     }
 
     /// Sets the value of a single bit in the hardware register to 0
@@ -62,8 +59,8 @@ impl Register {
     /// ```
     /// # use avr_bro::register::{Register, RegisterAddress};
     /// # use std::ptr;
-    /// let mut  mock_register: u8 = 3;
-    /// let register = Register::new(&mut mock_register as *mut u8);
+    /// let mut mock_register: u8 = 3;
+    /// let mut register = Register::new(&mut mock_register as *mut u8);
     ///
     /// // Set bit 0 of the register to 0
     /// unsafe {
@@ -72,11 +69,8 @@ impl Register {
     /// };
     /// ```
     #[inline]
-    pub unsafe fn clear_bit(&self, bit: u8) {
-        write_volatile(
-            self.address,
-            read_volatile(self.address) & !Self::bit_value(bit),
-        )
+    pub unsafe fn clear_bit(&mut self, bit: u8) {
+        self.write(self.read() & !Self::bit_value(bit))
     }
 
     /// Toggle the value of a single bit in the hardware register
@@ -90,8 +84,8 @@ impl Register {
     /// ```
     /// # use avr_bro::register::{Register, RegisterAddress};
     /// # use std::ptr;
-    /// let mut  mock_register: u8 = 0;
-    /// let register = Register::new(&mut mock_register as *mut u8);
+    /// let mut mock_register: u8 = 0;
+    /// let mut register = Register::new(&mut mock_register as *mut u8);
     ///
     /// // Toggle bit 2 of the register to 1 and vice versa
     /// unsafe {
@@ -103,11 +97,8 @@ impl Register {
     /// };
     /// ```
     #[inline]
-    pub unsafe fn toggle_bit(&self, bit: u8) {
-        write_volatile(
-            self.address,
-            read_volatile(self.address) ^ Self::bit_value(bit),
-        )
+    pub unsafe fn toggle_bit(&mut self, bit: u8) {
+        self.write(self.read() ^ Self::bit_value(bit))
     }
 
     /// Writes a byte value to the hardware register.
@@ -121,8 +112,8 @@ impl Register {
     /// ```
     /// # use avr_bro::register::{Register, RegisterAddress};
     /// # use std::ptr;
-    /// let mut  mock_register: u8 = 10;
-    /// let register = Register::new(&mut mock_register as *mut u8);
+    /// let mut mock_register: u8 = 10;
+    /// let mut register = Register::new(&mut mock_register as *mut u8);
     ///
     /// // Write the value 60 to the register
     /// unsafe {
@@ -131,7 +122,7 @@ impl Register {
     /// };
     /// ```
     #[inline]
-    pub unsafe fn write(&self, value: u8) {
+    pub unsafe fn write(&mut self, value: u8) {
         write_volatile(self.address, value)
     }
 
@@ -144,7 +135,7 @@ impl Register {
     /// ```
     /// # use avr_bro::register::{Register, RegisterAddress};
     /// # use std::ptr;
-    /// let mut  mock_register: u8 = 15;
+    /// let mut mock_register: u8 = 15;
     /// let register = Register::new(&mut mock_register as *mut u8);
     ///
     /// // Read the value from the register
