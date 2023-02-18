@@ -12,6 +12,5 @@ fn panic(_panic: &PanicInfo<'_>) -> ! {
 #[lang = "eh_personality"]
 extern "C" fn eh_personality() {}
 
-#[no_mangle]
-pub extern fn main() {
-}
+#[avr_bro::avr_main]
+fn main() {}

@@ -9,3 +9,5 @@ pub mod register;
 #[cfg(any(feature = "hal", doc))]
 #[doc(cfg(feature = "hal"))]
 pub mod hal;
+
+pub use avr_bro_macros::avr_main;

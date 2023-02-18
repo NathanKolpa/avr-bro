@@ -11,3 +11,4 @@ hal = []
 atmega328p = []
 
 [dependencies]
+avr-bro-macros = { path = "macros" }
