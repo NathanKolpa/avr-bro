@@ -6,6 +6,6 @@ pub mod controllers;
 
 pub mod register;
 
-#[cfg(feature = "hal")]
+#[cfg(any(feature = "hal", doc))]
 #[doc(cfg(feature = "hal"))]
 pub mod hal;
