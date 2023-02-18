@@ -11,6 +11,7 @@ pub type RegisterAddress = *mut u8;
 ///
 /// The `unsafe` methods for this struct uses [`read_volatile`] and [`write_volatile`] functions to read from and write
 /// to the memory location pointed to by the `address` field of the `Register` instance.
+#[derive(Clone, Eq, Ord, PartialOrd, PartialEq)]
 pub struct Register {
     address: RegisterAddress,
 }
@@ -154,6 +155,11 @@ impl Register {
     #[inline]
     pub unsafe fn read(&self) -> u8 {
         read_volatile(self.address)
+    }
+
+    /// Returns the memory address of this `Register`.
+    pub fn address(&self) -> RegisterAddress {
+        self.address
     }
 
     #[inline]
