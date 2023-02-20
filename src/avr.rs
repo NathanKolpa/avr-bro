@@ -6,7 +6,9 @@ use core::arch::asm;
 #[inline]
 pub fn no_op() {
     #[cfg(target_arch = "avr")]
-    unsafe { asm!("nop") }
+    unsafe {
+        asm!("nop")
+    }
 
     #[cfg(not(target_arch = "avr"))]
     unimplemented!()
