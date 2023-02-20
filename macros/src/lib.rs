@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 
-use quote::{quote, ToTokens};
+use quote::{quote};
 use syn::{parse::Error as ParseError, parse_macro_input, spanned::Spanned, ItemFn, ReturnType};
 
 #[proc_macro_attribute]
@@ -23,7 +23,7 @@ pub fn avr_main(_attrs: TokenStream, item: TokenStream) -> TokenStream {
         ReturnType::Type(_, ref return_type) => matches!(**return_type, syn::Type::Never(_)),
     };
 
-    let exit_guard = if !returns_never {
+    let exit_guard = if !returns_never && !cfg!(target_env = "gnu") {
         quote! { loop {} }
     } else {
         quote!()
