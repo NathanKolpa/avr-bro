@@ -7,10 +7,6 @@ pub mod controllers;
 
 pub mod register;
 
-#[cfg(any(feature = "hal", doc))]
-#[doc(cfg(feature = "hal"))]
-pub mod hal;
-
 pub mod avr;
 pub mod controller_traits;
 

@@ -6,8 +6,6 @@ license = "LGPL-3.0"
 
 [features]
 
-hal = []
-
 atmega328p = []
 
 [dependencies]
