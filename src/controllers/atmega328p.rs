@@ -3,11 +3,8 @@
 //! ## Additional resources:
 //! - [Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
 
-pub use registers::*;
-
-use crate::controller_traits::*;
-
-mod registers;
+pub mod registers;
+pub const CYCLES_PER_MILLISECOND: u32 = 16000;
 
 pub struct Atmega328P;
 
